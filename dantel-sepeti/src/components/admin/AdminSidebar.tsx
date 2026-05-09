@@ -13,10 +13,13 @@ import {
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+import { LayoutDashboard, Package, Tag, FileText, LogOut, ChevronRight, Menu } from "lucide-react";
+
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/products", label: "Ürünler", icon: Package },
   { href: "/admin/categories", label: "Kategoriler", icon: Tag },
+  { href: "/admin/content", label: "İçerik", icon: FileText },
 ];
 
 export default function AdminSidebar() {
