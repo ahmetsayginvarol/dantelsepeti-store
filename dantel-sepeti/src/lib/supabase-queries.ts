@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from 'next/cache';
 import { supabase } from "./supabase";
 import { Product, Category } from "@/types";
 
@@ -58,7 +59,9 @@ export async function getCategories(): Promise<Category[]> {
   if (error) { console.error(error); return []; }
   return data as Category[];
 }
-export async function getSiteContent(): Promise<Record<string, string>> {
+export async function getSiteContent():
+no store();
+Promise<Record<string, string>> {
   const { data, error } = await supabase
     .from("site_content")
     .select("key, value")
