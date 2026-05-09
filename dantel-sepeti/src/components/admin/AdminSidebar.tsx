@@ -5,15 +5,13 @@ import {
   LayoutDashboard,
   Package,
   Tag,
+  FileText,
   LogOut,
   ChevronRight,
   Menu,
-  X,
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-
-import { LayoutDashboard, Package, Tag, FileText, LogOut, ChevronRight, Menu } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
@@ -33,14 +31,12 @@ export default function AdminSidebar() {
 
   return (
     <>
-      {/* Desktop sidebar */}
       <aside
         className={cn(
           "hidden lg:flex flex-col h-screen sticky top-0 bg-obsidian-800 border-r border-gold-500/10 transition-all duration-300",
           collapsed ? "w-16" : "w-56"
         )}
       >
-        {/* Logo */}
         <div className="p-4 border-b border-gold-500/10 flex items-center justify-between min-h-[64px]">
           {!collapsed && (
             <div>
@@ -60,7 +56,6 @@ export default function AdminSidebar() {
           </button>
         </div>
 
-        {/* Nav */}
         <nav className="flex-1 py-4 space-y-1 px-2">
           {navItems.map((item) => {
             const active = isActive(item.href, item.exact);
@@ -85,7 +80,6 @@ export default function AdminSidebar() {
           })}
         </nav>
 
-        {/* Logout */}
         <div className="p-2 border-t border-gold-500/10">
           <Link
             href="/admin/login"
@@ -99,8 +93,6 @@ export default function AdminSidebar() {
           </Link>
         </div>
       </aside>
-
-      {/* Mobile top bar handled in layout */}
     </>
   );
 }
