@@ -2,7 +2,7 @@ import { Category, Product } from "@/types";
 
 export const demoCategories: Category[] = [
   {
-    id: "1",
+    id: "11111111-1111-1111-1111-111111111111",
     name: "İç Çamaşırı",
     slug: "ic-camasiri",
     description: "Zarif ve şık iç çamaşırı koleksiyonumuz",
@@ -10,7 +10,7 @@ export const demoCategories: Category[] = [
     created_at: new Date().toISOString(),
   },
   {
-    id: "2",
+    id: "22222222-2222-2222-2222-222222222222",
     name: "Bodysuitler",
     slug: "bodysuitler",
     description: "Vücudu saran seksi bodysuit modelleri",
@@ -18,7 +18,7 @@ export const demoCategories: Category[] = [
     created_at: new Date().toISOString(),
   },
   {
-    id: "3",
+    id: "33333333-3333-3333-3333-333333333333",
     name: "Gecelikler",
     slug: "gecelikler",
     description: "Romantik ve konforlu gecelik koleksiyonu",
@@ -26,7 +26,7 @@ export const demoCategories: Category[] = [
     created_at: new Date().toISOString(),
   },
   {
-    id: "4",
+    id: "44444444-4444-4444-4444-444444444444",
     name: "Fantezi",
     slug: "fantezi",
     description: "Cesur ve eşsiz fantezi koleksiyonu",
@@ -34,16 +34,14 @@ export const demoCategories: Category[] = [
     created_at: new Date().toISOString(),
   },
   {
-    id: "5",
+    id: "55555555-5555-5555-5555-555555555555",
     name: "Aksesuarlar",
     slug: "aksesuarlar",
     description: "Tamamlayıcı lüks aksesuarlar",
     image_url: "https://images.unsplash.com/photo-1588117305388-c2631a279f82?w=600&q=80",
     created_at: new Date().toISOString(),
   },
-];
-
-export const demoProducts: Product[] = [
+];export const demoProducts: Product[] = [
   {
     id: "1",
     sku: "DS-101",
