@@ -58,3 +58,12 @@ export async function getCategories(): Promise<Category[]> {
   if (error) { console.error(error); return []; }
   return data as Category[];
 }
+export async function getSiteContent(): Promise<Record<string, string>> {
+  const { data, error } = await supabase
+    .from("site_content")
+    .select("key, value");
+
+  if (error) { console.error(error); return {}; }
+
+  return Object.fromEntries(data.map((row) => [row.key, row.value ?? ""]));
+}
