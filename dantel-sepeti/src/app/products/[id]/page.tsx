@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { MessageCircle, ChevronLeft, Share2, Loader2 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -11,8 +10,8 @@ import { Product } from "@/types";
 import { formatPrice, calculateDiscount } from "@/lib/utils";
 import { generateOrderLink } from "@/lib/whatsapp";
 
-export default function ProductPage() {
-  const { id } = useParams();
+export default function ProductPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -86,7 +85,6 @@ export default function ProductPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20">
-            {/* Images */}
             <div className="space-y-3">
               <div className="relative aspect-[4/5] overflow-hidden bg-obsidian-700">
                 {images[selectedImage]?.url ? (
@@ -118,7 +116,6 @@ export default function ProductPage() {
               )}
             </div>
 
-            {/* Info */}
             <div className="lg:pt-4">
               <div className="flex items-center gap-4 mb-4">
                 <span className="font-sans text-xs tracking-[0.2em] text-gold-500/70 uppercase">{product.sku}</span>
