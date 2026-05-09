@@ -3,6 +3,7 @@ import { supabase } from "./supabase";
 import { Product, Category } from "@/types";
 
 export async function getProducts(categorySlug?: string): Promise<Product[]> {
+  noStore();
   let query = supabase
     .from("products")
     .select(`
@@ -27,6 +28,7 @@ export async function getProducts(categorySlug?: string): Promise<Product[]> {
 }
 
 export async function getFeatured(): Promise<Product[]> {
+  noStore();
   const { data, error } = await supabase
     .from("products")
     .select(`*, category:categories(*), images:product_images(*)`)
@@ -40,6 +42,7 @@ export async function getFeatured(): Promise<Product[]> {
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
+  noStore();
   const { data, error } = await supabase
     .from("products")
     .select(`*, category:categories(*), images:product_images(*)`)
@@ -51,6 +54,7 @@ export async function getProductById(id: string): Promise<Product | null> {
 }
 
 export async function getCategories(): Promise<Category[]> {
+  noStore();
   const { data, error } = await supabase
     .from("categories")
     .select("*")
@@ -59,15 +63,13 @@ export async function getCategories(): Promise<Category[]> {
   if (error) { console.error(error); return []; }
   return data as Category[];
 }
-export async function getSiteContent():
-no store();
-Promise<Record<string, string>> {
+
+export async function getSiteContent(): Promise<Record<string, string>> {
+  noStore();
   const { data, error } = await supabase
     .from("site_content")
-    .select("key, value")
-    .throwOnError();
+    .select("key, value");
 
   if (error) { console.error(error); return {}; }
-
   return Object.fromEntries(data.map((row) => [row.key, row.value ?? ""]));
 }
