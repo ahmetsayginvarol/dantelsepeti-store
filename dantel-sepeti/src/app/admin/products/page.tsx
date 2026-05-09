@@ -334,6 +334,10 @@ function ProductFormModal({ product, onClose }: { product: Product | null; onClo
     alert(isEdit ? "Ürün güncellendi!" : "Ürün eklendi!");
     onClose();
   };
+    console.log("Kaydedildi:", { ...form, images: uploadedImages });
+    alert(isEdit ? "Ürün güncellendi!" : "Ürün eklendi!");
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 modal-backdrop z-50 flex items-start justify-center p-4 overflow-y-auto">
