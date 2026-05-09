@@ -262,13 +262,51 @@ function ProductFormModal({ product, onClose }: { product: Product | null; onClo
   });
   const [images, setImages] = useState<string[]>(product?.images?.map((i) => i.url) ?? []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (images.length === 0) { alert("En az bir görsel yükleyin."); return; }
-    alert(isEdit ? "Ürün güncellendi!" : "Ürün eklendi!");
-    onClose();
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (images.length === 0) { alert("En az bir görsel yükleyin."); return; }
 
+  try {
+    // 1. Ürünü products tablosuna kaydet
+    const { data: product, error: productError } = await supabase
+      .from("products")
+      .insert({
+        sku: form.sku,
+        title: form.title,
+        description: form.description,
+        price: parseFloat(form.price),
+        original_price: form.original_price ? parseFloat(form.original_price) : null,
+        category_id: form.category_id || null,
+        sizes: form.sizes.split(",").map((s) => s.trim()).filter(Boolean),
+        is_featured: form.is_featured,
+        is_available: form.is_available,
+      })
+      .select()
+      .single();
+
+    if (productError) { alert(`Hata: ${productError.message}`); return; }
+
+    // 2. Görselleri product_images tablosuna kaydet
+    const imageRows = images.map((url, i) => ({
+      product_id: product.id,
+      url,
+      sort_order: i,
+      is_primary: i === 0,
+    }));
+
+    const { error: imgError } = await supabase
+      .from("product_images")
+      .insert(imageRows);
+
+    if (imgError) { alert(`Görsel kayıt hatası: ${imgError.message}`); return; }
+
+    alert("Ürün başarıyla eklendi!");
+    onClose();
+    window.location.reload();
+  } catch (err) {
+    alert("Beklenmeyen hata oluştu.");
+  }
+};
   const inputClass = "w-full bg-[#1a1a1a] border border-[#3d3d3d] focus:border-[rgba(201,169,110,0.5)] text-[rgba(248,244,237,0.9)] px-3.5 py-2.5 font-sans text-sm outline-none transition-colors";
   const labelClass = "block font-sans text-[10px] tracking-[0.2em] uppercase text-[rgba(200,185,165,0.6)] mb-1.5";
 
